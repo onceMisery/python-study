@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>审批流Trace与AI详情</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>审批流Trace与AI详情</h2>
+    <div>
+        <b>实例ID：</b> {{ instance_id }}
+    </div>
+    <h3>AI风险评估记录</h3>
+    <ul>
+        {% for r in risk_results %}
+        <li>
+            <b>风险等级：</b> {{ r.risk }}<br>
+            <b>建议：</b> {{ r.suggestion }}<br>
+            <b>时间：</b> {{ r.timestamp or '-' }}<br>
+            <pre>{{ r | tojson(indent=2, ensure_ascii=False) }}</pre>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/web/risk_history">返回AI风险评估历史</a>
+</body>
+</html> 

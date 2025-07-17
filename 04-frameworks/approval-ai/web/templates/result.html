@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>审批流执行结果</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>审批流执行结果</h2>
+    <div>
+        <b>实例ID：</b> {{ result.instance_id }}<br>
+        <b>最终节点：</b> {{ result.final_node }}<br>
+        <b>最终审批人：</b> {{ result.final_approver }}<br>
+        <b>AI建议：</b> {{ result.ai_suggestion }}<br>
+    </div>
+    <h3>流程Trace</h3>
+    <ul>
+        {% for node in result.trace %}
+        <li>{{ node.node_id }} ({{ node.type }})</li>
+        {% endfor %}
+    </ul>
+    <h3>AI风险评估详情</h3>
+    <pre>{{ result.ai_risk_result | tojson(indent=2, ensure_ascii=False) }}</pre>
+    <a href="/web/risk_history">查看AI风险评估历史</a>
+</body>
+</html> 

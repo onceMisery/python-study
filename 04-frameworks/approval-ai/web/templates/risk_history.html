@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>AI风险评估历史</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>AI风险评估历史</h2>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>实例ID</th>
+            <th>风险等级</th>
+            <th>建议</th>
+            <th>时间</th>
+            <th>详情</th>
+        </tr>
+        {% for r in risk_results %}
+        <tr>
+            <td>{{ r.instance_id }}</td>
+            <td>{{ r.risk }}</td>
+            <td>{{ r.suggestion }}</td>
+            <td>{{ r.timestamp or '-' }}</td>
+            <td><a href="/web/trace/{{ r.instance_id }}">查看Trace</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/web/result/{{ risk_results[-1].instance_id if risk_results else '' }}">返回最新审批结果</a>
+</body>
+</html> 

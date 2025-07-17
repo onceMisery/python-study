@@ -1,0 +1,67 @@
+{
+  "flow_id": "expense_approval_v2",
+  "name": "费用报销审批流（AI智能分流）",
+  "version": "2.0",
+  "description": "集成AI风险评估与智能分流的费用报销审批流，默认大模型为DeepSeek。",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "next": "risk_eval_1"
+    },
+    {
+      "id": "risk_eval_1",
+      "type": "risk_eval",
+      "name": "AI风险评估",
+      "params": {
+        "fields": ["amount", "urgency", "applicant_history"],
+        "llm_provider": "deepseek"
+      },
+      "next": "branch_1"
+    },
+    {
+      "id": "branch_1",
+      "type": "branch",
+      "name": "AI分流",
+      "branches": [
+        {
+          "condition": "risk == '高'",
+          "next": "approve_manager"
+        },
+        {
+          "condition": "risk == '中'",
+          "next": "approve_finance"
+        },
+        {
+          "condition": "risk == '低'",
+          "next": "approve_auto"
+        }
+      ]
+    },
+    {
+      "id": "approve_manager",
+      "type": "approve",
+      "name": "经理审批",
+      "approver": "manager",
+      "next": "end"
+    },
+    {
+      "id": "approve_finance",
+      "type": "approve",
+      "name": "财务审批",
+      "approver": "finance",
+      "next": "end"
+    },
+    {
+      "id": "approve_auto",
+      "type": "approve",
+      "name": "自动通过",
+      "approver": "system",
+      "next": "end"
+    },
+    {
+      "id": "end",
+      "type": "end"
+    }
+  ]
+} 

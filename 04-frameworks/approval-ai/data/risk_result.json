@@ -1,0 +1,32 @@
+[
+  {
+    "instance_id": "exp20240601-001",
+    "flow_id": "expense_approval_v2",
+    "node_id": "risk_eval_1",
+    "input": {
+      "amount": 12000,
+      "urgency": "高",
+      "applicant_history": "有一次违规记录"
+    },
+    "llm_provider": "deepseek",
+    "risk": "高",
+    "recommend_path": "经理审批",
+    "suggestion": "建议经理重点关注，金额较大且申请人有违规历史。",
+    "timestamp": "2024-06-01T10:00:00"
+  },
+  {
+    "instance_id": "exp20240601-002",
+    "flow_id": "expense_approval_v2",
+    "node_id": "risk_eval_1",
+    "input": {
+      "amount": 800,
+      "urgency": "低",
+      "applicant_history": "无异常"
+    },
+    "llm_provider": "deepseek",
+    "risk": "低",
+    "recommend_path": "自动通过",
+    "suggestion": "金额较小，历史正常，可自动通过。",
+    "timestamp": "2024-06-01T10:05:00"
+  }
+] 

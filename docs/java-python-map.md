@@ -10,11 +10,11 @@
 
 ### 1. 变量声明
 
-| 特性 | Java | Python |
-|------|------|--------|
-| 类型声明 | 必须显式声明 | 动态推导 |
-| 变量作用域 | 块级作用域 | 函数级作用域 |
-| 常量定义 | `final` 关键字 | 约定大写命名 |
+| 特性    | Java        | Python |
+|-------|-------------|--------|
+| 类型声明  | 必须显式声明      | 动态推导   |
+| 变量作用域 | 块级作用域       | 函数级作用域 |
+| 常量定义  | `final` 关键字 | 约定大写命名 |
 
 ```java
 // Java - 静态类型
@@ -111,6 +111,70 @@ while i < 10:
     i += 1
 ```
 
+在 Python 中，`__方法名__` 这种形式的方法被称为 **魔术方法（Magic Methods）** 或 **双下划线方法（Dunder Methods）**。它们是
+Python 中用于实现对象的特殊行为的一类方法。
+
+### 1. `__方法名__` 的作用：
+
+- 这些方法由 Python 解释器调用，而不是直接显式调用。
+- 它们定义了对象在特定操作下的行为，比如创建、初始化、加减运算、字符串表示、迭代等。
+- 通常用于实现类的内置行为，使用户自定义的类能够支持内建的操作。
+
+### 2. 常见的 `__方法名__` 及其用途：
+
+| 魔术方法                                                                                                            | 描述                                    |
+|-----------------------------------------------------------------------------------------------------------------|---------------------------------------|
+| [__init__(self, ...)](file://D:\code\py\python-study\05-tools\package-management\02_poetry_modern.py#L481-L483) | 构造函数，在创建对象时自动调用，用于初始化对象的属性。           |
+| `__new__(cls, ...)`                                                                                             | 在对象被创建之前调用，负责返回类的新实例。                 |
+| `__del__(self)`                                                                                                 | 析构函数，在对象被销毁前调用（不保证立即执行）。              |
+| `__str__(self)`                                                                                                 | 定义当使用 `str()` 函数或 `print()` 输出对象时的行为。 |
+| `__repr__(self)`                                                                                                | 定义对象的“官方”字符串表示，通常用于调试。                |
+| `__add__(self, other)`                                                                                          | 支持对象之间的 `+` 运算符。                      |
+| `__len__(self)`                                                                                                 | 支持对对象使用 `len(obj)`。                   |
+| `__getitem__(self, key)`                                                                                        | 支持对象像序列一样使用索引访问元素 `obj[key]`。         |
+| `__setitem__(self, key, value)`                                                                                 | 支持像序列一样给对象赋值 `obj[key] = value`。      |
+| `__call__(self, ...)`                                                                                           | 使对象可以像函数一样被调用。                        |
+| `__iter__(self)`                                                                                                | 返回一个迭代器对象，用于支持 `for ... in obj` 循环。   |
+| `__next__(self)`                                                                                                | 定义迭代器的下一个值。                           |
+| `__eq__(self, other)`                                                                                           | 定义等于运算符 `==` 的行为。                     |
+
+### 3. 示例代码说明：
+
+```python
+class MyClass:
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return f"MyClass instance with value: {self.value}"
+
+    def __add__(self, other):
+        return MyClass(self.value + other.value)
+
+
+# 创建两个对象
+a = MyClass(5)
+b = MyClass(10)
+
+# 使用 str() 触发 __str__
+print(a)  # 输出: MyClass instance with value: 5
+
+# 使用 + 运算符触发 __add__
+c = a + b
+print(c)  # 输出: MyClass instance with value: 15
+```
+
+### 4. 注意事项：
+
+- 不建议随意重写所有魔术方法，应根据需求选择性地实现。
+- 如果没有实现某个魔术方法，Python 会尝试使用默认行为（如果存在）。
+- 魔术方法增强了类的可读性和功能性，使其更贴近 Pythonic 编程风格。
+
+### 总结：
+
+`__方法名__` 是 Python 中的 **魔术方法**，用于定义对象的特殊行为，使得类可以支持内建操作（如 `+`, `len()`, `str()`
+等），从而提升代码的灵活性和可读性。
+
 ### 3. 函数/方法定义
 
 ```java
@@ -148,14 +212,17 @@ def add(a, b):
     """基本函数"""
     return a + b
 
+
 # 默认参数
 def greet(name, message="Hello"):
     return f"{message}, {name}!"
+
 
 # 可变参数
 def sum_numbers(*args):
     """可变位置参数"""
     return sum(args)
+
 
 # 关键字参数
 def create_user(name, age, **kwargs):
@@ -164,16 +231,18 @@ def create_user(name, age, **kwargs):
     user.update(kwargs)
     return user
 
+
 # 类型提示
 def calculate(a: int, b: int) -> int:
     return a + b
+
 
 # 类方法和静态方法
 class Calculator:
     @staticmethod
     def multiply(a, b):
         return a * b
-    
+
     @classmethod
     def from_string(cls, calculation_str):
         # 解析字符串并创建实例
@@ -218,32 +287,32 @@ public class Person {
 # Python
 class Person:
     count = 0  # 类变量
-    
+
     def __init__(self, name, age):
         """构造函数"""
         self.name = name  # 实例变量
         self.age = age
         Person.count += 1
-    
+
     def introduce(self):
         """实例方法"""
         print(f"I'm {self.name}, {self.age} years old")
-    
+
     @classmethod
     def get_count(cls):
         """类方法"""
         return cls.count
-    
+
     @staticmethod
     def is_adult(age):
         """静态方法"""
         return age >= 18
-    
+
     @property
     def display_name(self):
         """属性访问器"""
         return f"Mr./Ms. {self.name}"
-    
+
     @display_name.setter
     def display_name(self, value):
         """属性设置器"""
@@ -290,26 +359,29 @@ public class Dog extends Animal {
 class Animal:
     def __init__(self, name):
         self.name = name
-    
+
     def speak(self):
         print(f"{self.name} makes a sound")
+
 
 class Dog(Animal):
     def __init__(self, name, breed):
         super().__init__(name)  # 调用父类构造函数
         self.breed = breed
-    
+
     def speak(self):
         """重写父类方法"""
         print(f"{self.name} barks")
-    
+
     def wag_tail(self):
         print(f"{self.name} wags tail")
+
 
 # 多重继承（Java不支持）
 class Flyable:
     def fly(self):
         print("Flying...")
+
 
 class Bird(Animal, Flyable):
     def __init__(self, name, wing_span):
@@ -323,13 +395,13 @@ class Bird(Animal, Flyable):
 
 ### 1. 集合类型
 
-| Java类型 | Python类型 | 特性对比 |
-|----------|-------------|----------|
-| `ArrayList<T>` | `list` | 动态数组，可变长度 |
-| `LinkedList<T>` | `collections.deque` | 双端队列 |
-| `HashMap<K,V>` | `dict` | 键值对映射 |
-| `HashSet<T>` | `set` | 无重复元素集合 |
-| `String` | `str` | 不可变字符串 |
+| Java类型          | Python类型            | 特性对比      |
+|-----------------|---------------------|-----------|
+| `ArrayList<T>`  | `list`              | 动态数组，可变长度 |
+| `LinkedList<T>` | `collections.deque` | 双端队列      |
+| `HashMap<K,V>`  | `dict`              | 键值对映射     |
+| `HashSet<T>`    | `set`               | 无重复元素集合   |
+| `String`        | `str`               | 不可变字符串    |
 
 ```java
 // Java
@@ -366,8 +438,8 @@ unique_names = {"Alice", "Bob"}
 unique_names.add("Charlie")
 
 # 列表推导式（Java无对应语法）
-squares = [x**2 for x in range(10)]
-even_squares = [x**2 for x in range(10) if x % 2 == 0]
+squares = [x ** 2 for x in range(10)]
+even_squares = [x ** 2 for x in range(10) if x % 2 == 0]
 ```
 
 ### 2. 字符串处理
@@ -449,15 +521,18 @@ else:
 finally:
     print("Cleanup code")
 
+
 # 自定义异常
 class CustomException(Exception):
     def __init__(self, message):
         super().__init__(message)
         self.message = message
 
+
 # 抛出异常（不需要声明）
 def risky_function():
     raise CustomException("Something went wrong")
+
 
 # 异常链
 try:
@@ -502,10 +577,12 @@ def capitalize(text):
     """首字母大写"""
     return text.capitalize() if text else text
 
+
 def snake_to_camel(snake_str):
     """蛇形命名转驼峰命名"""
     components = snake_str.split('_')
     return components[0] + ''.join(x.title() for x in components[1:])
+
 
 # 文件: utils/__init__.py
 from .string_util import capitalize, snake_to_camel
@@ -567,7 +644,7 @@ squares = list(map(square, numbers))
 
 # 更Pythonic的写法
 evens = [x for x in numbers if x % 2 == 0]
-squares = [x**2 for x in numbers]
+squares = [x ** 2 for x in numbers]
 ```
 
 ### 2. 装饰器模式
@@ -604,8 +681,10 @@ public class Decorator implements Component {
 import time
 from functools import wraps
 
+
 def timer(func):
     """计时装饰器"""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         start = time.time()
@@ -613,15 +692,20 @@ def timer(func):
         end = time.time()
         print(f"{func.__name__} took {end - start:.2f} seconds")
         return result
+
     return wrapper
+
 
 def log(func):
     """日志装饰器"""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         print(f"Calling {func.__name__} with args: {args}, kwargs: {kwargs}")
         return func(*args, **kwargs)
+
     return wrapper
+
 
 # 使用装饰器
 @timer
@@ -672,24 +756,29 @@ import asyncio
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+
 # 多线程
 def worker(name):
     time.sleep(1)
     return f"Worker {name} completed"
 
+
 with ThreadPoolExecutor(max_workers=4) as executor:
     futures = [executor.submit(worker, i) for i in range(4)]
     results = [future.result() for future in as_completed(futures)]
+
 
 # 异步编程（Python独有的简洁语法）
 async def async_worker(name):
     await asyncio.sleep(1)
     return f"Async worker {name} completed"
 
+
 async def main():
     tasks = [async_worker(i) for i in range(4)]
     results = await asyncio.gather(*tasks)
     print(results)
+
 
 # 运行异步函数
 asyncio.run(main())
@@ -762,9 +851,12 @@ myapp/
 
 ```python
 # Python - requirements.txt
-flask==2.3.0
-requests==2.28.0
-pytest==7.1.0
+flask == 2.3
+.0
+requests == 2.28
+.0
+pytest == 7.1
+.0
 
 # 或者 pyproject.toml (Poetry)
 [tool.poetry.dependencies]
@@ -782,12 +874,12 @@ pytest = "^7.1.0"
 
 ### 1. 性能考虑
 
-| 方面 | Java | Python |
-|------|------|--------|
-| 执行速度 | 编译型，更快 | 解释型，相对较慢 |
-| 内存管理 | JVM垃圾回收 | 引用计数 + 循环垃圾回收 |
-| 并发模型 | 真正的多线程 | GIL限制（但有multiprocessing） |
-| 启动时间 | JVM启动较慢 | 快速启动 |
+| 方面   | Java    | Python                   |
+|------|---------|--------------------------|
+| 执行速度 | 编译型，更快  | 解释型，相对较慢                 |
+| 内存管理 | JVM垃圾回收 | 引用计数 + 循环垃圾回收            |
+| 并发模型 | 真正的多线程  | GIL限制（但有multiprocessing） |
+| 启动时间 | JVM启动较慢 | 快速启动                     |
 
 ### 2. 编码风格
 
@@ -809,7 +901,7 @@ public class UserService {
 class UserService:
     def __init__(self, user_repository):
         self.user_repository = user_repository
-    
+
     def get_user_by_id(self, user_id):
         """获取用户，如果不存在则抛出异常"""
         user = self.user_repository.find_by_id(user_id)
@@ -837,11 +929,13 @@ def bad_function(items=[]):  # 危险！
     items.append(1)
     return items
 
+
 def good_function(items=None):  # 正确
     if items is None:
         items = []
     items.append(1)
     return items
+
 
 # 陷阱2：闭包中的变量绑定
 functions = []
@@ -873,6 +967,7 @@ import this
 ```
 
 核心理念：
+
 - 优美胜于丑陋
 - 明确胜于晦涩
 - 简单胜于复杂

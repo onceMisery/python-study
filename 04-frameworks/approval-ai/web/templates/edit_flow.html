@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>审批流可视化设计器</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/reactflow/reactflow.min.css">
+    <script src="/static/reactflow/reactflow.umd.js"></script>
+    <script src="/static/mermaid/mermaid.min.js"></script>
+</head>
+<body>
+    <h2>审批流可视化设计器</h2>
+    <div id="root"></div>
+    <div style="margin:24px;">
+        <button onclick="exportDSL()">导出DSL</button>
+        <input type="file" id="importDSL" onchange="importDSL(event)" style="display:none;">
+        <button onclick="document.getElementById('importDSL').click()">导入DSL</button>
+        <button onclick="showMermaid()">预览流程图</button>
+    </div>
+    <div id="mermaid-preview" style="margin:24px;display:none;"></div>
+    <script src="/static/main.js"></script>
+</body>
+</html> 
