@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>审批人登录</title>
+</head>
+<body>
+    <h1>审批人登录</h1>
+    <form action="/login" method="post">
+        <select name="user">
+            {% for u in users %}
+            <option value="{{ u }}">{{ u }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="登录">
+    </form>
+    <a href="/">返回首页</a>
+</body>
+</html> 

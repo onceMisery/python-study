@@ -1,0 +1,4 @@
+{
+  "user001": {"user_id": "user001", "name": "小明", "vip": true},
+  "user002": {"user_id": "user002", "name": "Lucy", "vip": false}
+} 

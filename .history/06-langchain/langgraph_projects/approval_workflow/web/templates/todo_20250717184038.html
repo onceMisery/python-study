@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>待办审批</title>
+</head>
+<body>
+    <h1>待办审批（{{ user }}）</h1>
+    <table border="1">
+        <tr><th>请求ID</th><th>用户</th><th>金额</th><th>事由</th><th>紧急</th><th>操作</th></tr>
+        {% for req in todo %}
+        <tr>
+            <td>{{ req.request_id }}</td>
+            <td>{{ req.user }}</td>
+            <td>{{ req.amount }}</td>
+            <td>{{ req.reason }}</td>
+            <td>{{ req.urgent }}</td>
+            <td><a href="/approve/{{ req.request_id }}?user={{ user }}">审批</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">返回首页</a>
+</body>
+</html> 

@@ -1,0 +1,23 @@
+{
+  "nodes": [
+    {"id": "submit", "type": "start", "label": "用户提交"},
+    {"id": "manager", "type": "approve", "label": "主管审批", "approver": "manager"},
+    {"id": "amount_branch", "type": "branch", "label": "金额判断"},
+    {"id": "finance", "type": "approve", "label": "财务审批", "approver": "finance"},
+    {"id": "ceo", "type": "approve", "label": "总经理审批", "approver": "ceo"},
+    {"id": "parallel", "type": "parallel", "label": "会签"},
+    {"id": "notify", "type": "notify", "label": "通知"},
+    {"id": "end", "type": "end", "label": "结束"}
+  ],
+  "edges": [
+    {"from": "submit", "to": "manager"},
+    {"from": "manager", "to": "amount_branch"},
+    {"from": "amount_branch", "to": "finance", "condition": "amount < 10000"},
+    {"from": "amount_branch", "to": "ceo", "condition": "amount >= 10000 && !urgent"},
+    {"from": "amount_branch", "to": "parallel", "condition": "amount >= 10000 && urgent"},
+    {"from": "finance", "to": "notify"},
+    {"from": "ceo", "to": "notify"},
+    {"from": "parallel", "to": "notify"},
+    {"from": "notify", "to": "end"}
+  ]
+} 

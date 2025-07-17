@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>发起新审批请求</title>
+</head>
+<body>
+    <h1>发起新审批请求</h1>
+    <form action="/submit" method="post">
+        <input type="hidden" name="tenant" value="{{ tenant }}">
+        用户名: <input type="text" name="user" required><br>
+        金额: <input type="number" name="amount" required><br>
+        事由: <input type="text" name="reason" required><br>
+        紧急: <input type="checkbox" name="urgent" value="true"><br>
+        <input type="submit" value="提交">
+    </form>
+    <form method="get" action="/new">
+        <label>切换租户/业务线：</label>
+        <select name="tenant" onchange="this.form.submit()">
+            {% for t in tenants %}
+            <option value="{{ t }}" {% if t==tenant %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <a href="/">返回首页</a>
+</body>
+</html> 

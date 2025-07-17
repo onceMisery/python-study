@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>审批流配置编辑</title>
+</head>
+<body>
+    <h1>审批流配置编辑（{{ tenant }}）</h1>
+    <form action="/save_flow" method="post">
+        <input type="hidden" name="tenant" value="{{ tenant }}">
+        <textarea name="flow_code" rows="20" cols="80">{{ flow_code }}</textarea><br>
+        <input type="submit" value="保存配置">
+    </form>
+    <form action="/upload_flow" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="tenant" value="{{ tenant }}">
+        <input type="file" name="file">
+        <input type="submit" value="上传配置文件">
+    </form>
+    <form method="get" action="/edit_flow">
+        <label>切换租户/业务线：</label>
+        <select name="tenant" onchange="this.form.submit()">
+            {% for t in tenants %}
+            <option value="{{ t }}" {% if t==tenant %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <a href="/">返回首页</a>
+</body>
+</html> 

@@ -1,0 +1,5 @@
+{
+  "default": "openai",
+  "marketing": "deepseek",
+  "finance": "openai"
+} 

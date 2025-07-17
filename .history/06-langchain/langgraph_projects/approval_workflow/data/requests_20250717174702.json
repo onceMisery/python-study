@@ -1,0 +1,16 @@
+[
+  {
+    "request_id": "REQ001",
+    "user": "张三",
+    "amount": 12000,
+    "reason": "采购高性能服务器",
+    "urgent": true
+  },
+  {
+    "request_id": "REQ002",
+    "user": "李四",
+    "amount": 5000,
+    "reason": "市场活动经费",
+    "urgent": false
+  }
+] 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>审批操作</title>
+</head>
+<body>
+    <h1>审批操作（{{ user }}）</h1>
+    <form action="/approve/{{ req.request_id }}" method="post">
+        <input type="hidden" name="user" value="{{ user }}">
+        <p>请求ID: {{ req.request_id }}</p>
+        <p>用户: {{ req.user }}</p>
+        <p>金额: {{ req.amount }}</p>
+        <p>事由: {{ req.reason }}</p>
+        <p>紧急: {{ req.urgent }}</p>
+        <p>AI建议意见: <span style="color:green">{{ ai_comment }}</span></p>
+        <p>审批意见: <input type="text" name="comment" value="{{ ai_comment }}" size="60"></p>
+        <p>
+            <input type="radio" name="approve" value="yes" checked> 通过
+            <input type="radio" name="approve" value="no"> 拒绝
+        </p>
+        <input type="submit" value="提交审批">
+    </form>
+    <a href="/todo?user={{ user }}">返回待办</a>
+</body>
+</html> 
