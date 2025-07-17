@@ -1,0 +1,13 @@
+{
+  "amount_threshold": 10000,
+  "urgent_threshold": 5000,
+  "flows": {
+    "default": ["manager", "amount_branch"],
+    "urgent": ["manager", "finance", "notify"]
+  },
+  "approvers": {
+    "manager": "王主管",
+    "finance": "李会计",
+    "ceo": "赵总"
+  }
+} 

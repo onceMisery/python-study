@@ -110,6 +110,35 @@ pip install -r requirements.txt
 
 详细学习路线请查看 [docs/learning-path.md](docs/learning-path.md)
 
+## 第六阶段：工具生态
+
+本阶段目标是掌握 Python 生态下的主流开发工具，理解与 Java 生态的异同，形成高效、可维护的开发与部署流程。
+
+### 6.1 包管理工具
+- 掌握 pip、poetry、pipenv 的使用方法及适用场景
+- 对比 Java 的 Maven/Gradle
+- 形成依赖管理最佳实践
+- 相关代码与文档：
+  - 05-tools/package-management/
+  - docs/best-practices.md
+  - docs/java-python-map.md
+
+### 6.2 开发环境
+- 掌握虚拟环境（venv/virtualenv/pyenv）管理
+- 熟悉主流 IDE（VSCode/PyCharm）配置
+- 掌握 Python 调试技巧（pdb、IDE 调试）
+- 相关代码与文档：
+  - 05-tools/virtual-env/
+  - docs/best-practices.md
+
+### 6.3 部署工具
+- 掌握 Docker 化部署流程
+- 了解主流云平台部署方式
+- 掌握性能监控工具的基本用法
+- 相关代码与文档：
+  - 05-tools/deployment/
+  - docs/best-practices.md
+
 ## 贡献指南
 
 本项目持续更新，欢迎提交学习心得和代码改进建议。

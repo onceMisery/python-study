@@ -1,0 +1,8 @@
+LangChain广泛应用于智能问答、知识管理、AI助手、文档摘要、智能客服等场景。
+
+生态支持：
+- 多种主流大语言模型（如OpenAI、Anthropic、Llama等）
+- 多种向量数据库（如FAISS、Chroma、Milvus等）
+- 丰富的文档加载器和工具集成
+
+LangChain让AI应用开发更高效、更易扩展。 
