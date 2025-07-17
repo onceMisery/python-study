@@ -102,6 +102,36 @@ def demo_basic_decorator_syntax():
     print()
 
 
+"""
+*args 的作用：
+- 用途：收集所有位置参数（positional arguments）
+- 类型：一个元组（tuple）
+- 适用场景：
+    当你不知道函数会接收到多少个位置参数时
+    想要将多个参数统一处理或传递给另一个函数
+eg:   
+def example(*args):
+    print("args 类型:", type(args))
+    print("args 内容:", args)
+
+example(1, 2, 3)
+
+**kwargs 的作用：
+- 用途：收集所有关键字参数（keyword arguments）
+- 类型：一个字典（dict）
+- 适用场景：
+    当你不知道函数会接收到多少个关键字参数时
+    想要根据参数名进行特定处理
+eg:
+def example(**kwargs):
+    print("kwargs 类型:", type(kwargs))
+    print("kwargs 内容:", kwargs)
+
+example(name="Alice", age=25, city="Beijing")
+    
+✅ 总结一句话：
+*args 用来接收所有位置参数并打包成元组，**kwargs 用来接收所有关键字参数并打包成字典。两者结合可以让你写出更灵活、通用的函数和装饰器。    
+"""
 def demo_decorator_with_arguments():
     """演示带参数的装饰器"""
     print("=== 2. 带参数的装饰器 ===")
