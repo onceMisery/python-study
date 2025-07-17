@@ -15,37 +15,44 @@
 
 **日期**: 2024-01-01  
 **学习时间**: 2小时  
-**学习内容**: 
+**学习内容**:
+
 - 项目结构了解
 - 环境配置
 - 第一个Python程序
 
 **重要概念**:
+
 - Python动态类型 vs Java静态类型
 - 缩进语法 vs 大括号
 - f-string vs String.format
 
 **Java对比要点**:
+
 ```python
 # Python
 name = "Alice"
 print(f"Hello, {name}")
 
 # vs Java
-String name = "Alice";
+String
+name = "Alice";
 System.out.println("Hello, " + name);
 ```
 
 **遇到的问题**:
+
 - [ ] 问题描述
 - [ ] 解决方案
 - [ ] 经验总结
 
 **今日收获**:
+
 - 理解了Python的简洁语法
 - 掌握了基本的变量定义和类型
 
 **明日计划**:
+
 - 学习Python数据类型
 - 练习条件判断语句
 
@@ -55,28 +62,34 @@ System.out.println("Hello, " + name);
 
 **日期**: [填写日期]  
 **学习时间**: [学习时长]  
-**学习内容**: 
+**学习内容**:
+
 - [ ] 列表(List)操作
-- [ ] 字典(Dict)使用  
+- [ ] 字典(Dict)使用
 - [ ] 元组(Tuple)特性
 - [ ] 集合(Set)运算
 
 **重要概念**:
+
 - [记录关键概念]
 
 **Java对比要点**:
+
 ```python
 # 记录对比代码
 ```
 
 **遇到的问题**:
+
 - [ ] 问题1
 - [ ] 问题2
 
 **今日收获**:
+
 - [记录学习收获]
 
 **明日计划**:
+
 - [制定下一步计划]
 
 ---
@@ -86,6 +99,7 @@ System.out.println("Hello, " + name);
 ### 第一阶段：基础语法 (第1-14天)
 
 **完成情况**:
+
 - [x] 变量和数据类型
 - [ ] 控制流程
 - [ ] 函数定义
@@ -93,16 +107,19 @@ System.out.println("Hello, " + name);
 - [ ] 字符串处理
 
 **掌握程度评估** (1-5分):
+
 - 变量定义: ☆☆☆☆☆
 - 类型转换: ☆☆☆☆☆
 - 基本语法: ☆☆☆☆☆
 
 **重要发现**:
+
 1. Python的动态类型让编程更灵活
 2. f-string比Java的字符串格式化更直观
 3. 缩进强制规范让代码更整洁
 
 **仍需加强**:
+
 1. 列表推导式的理解
 2. 字典操作的熟练度
 3. 异常处理机制
@@ -113,35 +130,39 @@ System.out.println("Hello, " + name);
 
 ### Python vs Java 核心差异
 
-| 特性 | Python | Java | 备注 |
-|------|--------|------|------|
-| 类型系统 | 动态类型 | 静态类型 | Python运行时确定类型 |
-| 语法结构 | 缩进 | 大括号 | Python强制缩进规范 |
-| 变量声明 | 直接赋值 | 类型+名称 | Python无需显式声明 |
-| 字符串格式化 | f-string | String.format | Python更简洁 |
-| 空值 | None | null | 概念相同，写法不同 |
+| 特性     | Python   | Java          | 备注            |
+|--------|----------|---------------|---------------|
+| 类型系统   | 动态类型     | 静态类型          | Python运行时确定类型 |
+| 语法结构   | 缩进       | 大括号           | Python强制缩进规范  |
+| 变量声明   | 直接赋值     | 类型+名称         | Python无需显式声明  |
+| 字符串格式化 | f-string | String.format | Python更简洁     |
+| 空值     | None     | null          | 概念相同，写法不同     |
 
 ### 重要概念清单
 
 **基础语法**:
+
 - [x] 变量命名规范 (snake_case vs camelCase)
 - [x] 数据类型 (int, float, str, bool, None)
 - [x] 类型检查 (type() vs getClass())
 - [x] 类型转换 (构造函数风格 vs 显式转换)
 
 **数据结构**:
+
 - [ ] List vs ArrayList
-- [ ] Dict vs HashMap  
+- [ ] Dict vs HashMap
 - [ ] Tuple vs 不可变对象
 - [ ] Set vs HashSet
 
 **控制流程**:
+
 - [ ] if/elif/else vs if/else if/else
 - [ ] for循环 vs for/foreach
 - [ ] while循环
 - [ ] break/continue/pass
 
 **函数定义**:
+
 - [ ] def vs method定义
 - [ ] 参数传递 (位置参数、关键字参数、默认参数)
 - [ ] 返回值 (多返回值 vs 单返回值)
@@ -155,12 +176,14 @@ System.out.println("Hello, " + name);
 
 **困难点**: 习惯了Java的编译时类型检查，对Python运行时错误不适应
 
-**解决策略**: 
+**解决策略**:
+
 - 使用类型提示 (typing模块)
 - 编写单元测试验证类型
 - 使用IDE的类型检查功能
 
 **示例**:
+
 ```python
 # 添加类型提示帮助理解
 def calculate_score(name: str, score: float) -> str:
@@ -172,6 +195,7 @@ def calculate_score(name: str, score: float) -> str:
 **困难点**: 容易出现缩进错误，习惯大括号思维
 
 **解决策略**:
+
 - 配置编辑器显示空白字符
 - 使用4个空格作为缩进标准
 - 避免混用空格和制表符
@@ -181,6 +205,7 @@ def calculate_score(name: str, score: float) -> str:
 **困难点**: 理解Python对象的可变性概念
 
 **解决策略**:
+
 - 区分可变对象(list, dict, set)和不可变对象(int, str, tuple)
 - 理解引用传递和值传递的区别
 - 注意函数默认参数的陷阱
@@ -197,14 +222,17 @@ def calculate_score(name: str, score: float) -> str:
 **代码位置**: `/01-basics/variables/personal_info.py`
 
 **项目收获**:
+
 - 熟练使用字典存储结构化数据
 - 掌握列表操作方法
 - 理解字符串格式化
 
 **遇到的挑战**:
+
 - [记录具体挑战]
 
 **解决方案**:
+
 - [记录解决过程]
 
 ---
@@ -225,7 +253,7 @@ for key, value in my_dict.items():
     print(f"{key}: {value}")
 
 # 列表推导式
-squares = [x**2 for x in range(10)]
+squares = [x ** 2 for x in range(10)]
 
 # 文件读取
 with open('file.txt', 'r') as f:
@@ -244,16 +272,19 @@ with open('file.txt', 'r') as f:
 ## 下阶段计划
 
 ### 短期目标 (1-2周)
+
 - [ ] 完成基础语法学习
 - [ ] 掌握面向对象编程
 - [ ] 理解模块和包管理
 
 ### 中期目标 (1个月)
+
 - [ ] 学习Web框架 (Flask/Django)
 - [ ] 掌握数据库操作
 - [ ] 完成一个小项目
 
 ### 长期目标 (3个月)
+
 - [ ] 熟练使用Python进行日常开发
 - [ ] 理解Python生态系统
 - [ ] 能够独立设计Python项目架构
@@ -263,16 +294,19 @@ with open('file.txt', 'r') as f:
 ## 反思与总结
 
 ### 学习方法反思
+
 - **有效的方法**: [记录有效的学习方法]
 - **需要改进**: [记录需要改进的地方]
 - **时间管理**: [学习时间安排的经验]
 
 ### Java经验的价值
+
 - **有助的概念**: 面向对象思维、设计模式、软件工程实践
 - **需要转换的思维**: 静态类型到动态类型、严格语法到简洁语法
 - **可以复用的经验**: 问题分析能力、代码组织能力、测试思维
 
 ### 对Python的认识变化
+
 - **初始印象**: [最初对Python的看法]
 - **当前理解**: [现在对Python的理解]
 - **未来期望**: [对未来Python应用的期望]
