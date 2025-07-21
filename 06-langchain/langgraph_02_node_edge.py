@@ -30,6 +30,7 @@ def greet(state):
     print("节点1：问候用户")
     # 使用大模型生成问候语
     response = llm.invoke("用中文写一句友好的欢迎语")
+    print("Greet response:", response.content)  # 添加调试输出
     return {"greet": response.content}
 
 
@@ -37,6 +38,7 @@ def ask_name(state):
     print("节点2：询问用户姓名")
     # 使用大模型生成询问语
     response = llm.invoke("用中文写一句自然的询问用户姓名的话")
+    print("Ask name response:", response.content)  # 添加调试输出
     return {"name": input(response.content)}
 
 
@@ -44,6 +46,7 @@ def say_goodbye(state):
     print("节点3：结束对话")
     # 使用大模型生成告别语
     response = llm.invoke(f"用中文写一句友好的告别语，包含{state['name']}这个名字")
+    print("Goodbye response:", response.content)  # 添加调试输出
     return {"bye": response.content}
 
 
@@ -67,3 +70,8 @@ graph.set_entry_point("greet")  # 直接设置greet节点为入口点
 graph.add_edge("greet", "ask_name")
 graph.add_edge("ask_name", "say_goodbye")
 graph.add_edge("say_goodbye", END)  # END表示流程结束
+
+# 3. 运行图（Graph）
+app = graph.compile()
+result = app.invoke({})
+print("最终输出：", result)
