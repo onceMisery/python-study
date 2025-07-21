@@ -7,6 +7,7 @@ import json
 import os
 from graph import run_approval_workflow
 
+
 def batch_approval():
     requests_path = os.path.join(os.path.dirname(__file__), 'data', 'requests.json')
     with open(requests_path, 'r', encoding='utf-8') as f:
@@ -16,6 +17,7 @@ def batch_approval():
         print(f"\n--- 开始审批请求 {req['request_id']} ---")
         run_approval_workflow(init_state=req)
     print("\n全部审批流程已处理完毕。")
+
 
 def query_history(request_id):
     history_path = os.path.join(os.path.dirname(__file__), 'data', 'history.json')
@@ -30,6 +32,7 @@ def query_history(request_id):
             return
     print(f"未找到请求ID为{request_id}的审批历史。")
 
+
 if __name__ == "__main__":
     print("欢迎使用AI自动化审批流系统！")
     print("1. 批量审批  2. 查询审批历史  3. 单条演示")
@@ -40,4 +43,4 @@ if __name__ == "__main__":
         req_id = input("请输入要查询的审批请求ID：").strip()
         query_history(req_id)
     else:
-        run_approval_workflow() 
+        run_approval_workflow()

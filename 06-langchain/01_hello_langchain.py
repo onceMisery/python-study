@@ -10,15 +10,29 @@
 - 设置环境变量 OPENAI_API_KEY=你的key
 - 安装依赖：pip install langchain openai
 """
+import os
 
-from langchain.llms import OpenAI
+from dotenv import load_dotenv
+from langchain_core.messages import HumanMessage
+from langchain_openai import ChatOpenAI
 
-# 初始化OpenAI LLM（需设置OPENAI_API_KEY环境变量）
-llm = OpenAI(temperature=0.7)
+load_dotenv()
 
-# 发送一个简单的提问
-question = "用一句话介绍一下LangChain是什么？"
-answer = llm(question)
+# 初始化 DeepSeek LLM
+llm = ChatOpenAI(
+    api_key=os.getenv("DEEPSEEK_API_KEY"),
+    base_url="https://api.deepseek.com",
+    temperature=0.7,
+    model="deepseek-chat"  # 指定模型名称（可选）
+)
 
-print("问题：", question)
-print("回答：", answer) 
+# 调用模型 对话描模式
+response = llm.invoke([
+    {"role": "system", "content": "You are a helpful assistant"},
+    {"role": "user", "content": "Hello"},
+])
+
+print(response.content)
+# 给定角色
+response = llm.invoke([HumanMessage("hello")])
+print(response.content)

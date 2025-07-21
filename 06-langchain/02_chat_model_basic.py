@@ -11,16 +11,21 @@ LangChain 聊天模型基础示例
 - 设置环境变量 OPENAI_API_KEY=你的key
 - 安装依赖：pip install langchain openai
 """
+import os
 
-from langchain.chat_models import ChatOpenAI
-from langchain.schema import (
-    SystemMessage,
-    HumanMessage,
-    AIMessage
-)
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.schema import SystemMessage, HumanMessage, AIMessage
+
+load_dotenv()
 
 # 初始化ChatOpenAI模型
-chat = ChatOpenAI(temperature=0.7)
+chat = ChatOpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),  # 替换为你的 DeepSeek API Key
+    base_url="https://api.deepseek.com",
+    temperature=0.7,
+    model="deepseek-chat"
+)
 
 # 构建对话历史
 messages = [
@@ -31,6 +36,6 @@ messages = [
 ]
 
 # 发送多轮对话
-response = chat(messages)
+response = chat.invoke(messages)
 
-print("AI回答：", response.content) 
+print("AI回答：", response.content)

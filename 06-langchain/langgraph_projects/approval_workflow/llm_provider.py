@@ -32,7 +32,9 @@ def get_llm(tenant="default"):
     else:
         llm_type = "openai"
     if llm_type == "deepseek":
-        api_key = os.getenv("DEEPSEEK_API_KEY")
+        api_key = os.getenv("DEEPSEEK_API_KEY")  # 使用环境变量获取 API Key
+        if not api_key:
+            raise ValueError("DEEPSEEK_API_KEY environment variable not set")
         return DeepSeekLLM(api_key=api_key)
     else:
         return OpenAI(temperature=0) 

@@ -10,25 +10,51 @@ LangChain 记忆（Memory）机制基础示例
 - 设置环境变量 OPENAI_API_KEY=你的key
 - 安装依赖：pip install langchain openai
 """
+from dotenv import load_dotenv
+from langchain.memory import RunnableWithMessageHistory
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import MessagesPlaceholder
+from langchain_core.prompts import ChatPromptTemplate
+import os
 
-from langchain.memory import ConversationBufferMemory
-from langchain.llms import OpenAI
-from langchain.chains import ConversationChain
+load_dotenv()
 
-# 初始化OpenAI LLM
-llm = OpenAI(temperature=0.7)
+# 初始化 DeepSeek LLM
+llm = ChatOpenAI(
+    api_key=os.getenv("DEEPSEEK_API_KEY"),  # 使用环境变量获取 API Key
+    base_url="https://api.deepseek.com",
+    temperature=0.7,
+    model="deepseek-chat"  # 指定模型名称（可选）
+)
 
-# 创建对话记忆对象
-memory = ConversationBufferMemory()
+# 创建带有消息历史的提示模板
+prompt = ChatPromptTemplate.from_messages(
+    [
+        MessagesPlaceholder(variable_name="history"),
+        ("user", "{input}")
+    ]
+)
 
-# 创建ConversationChain，集成记忆机制
-conversation = ConversationChain(
-    llm=llm,
-    memory=memory,
-    verbose=True  # 输出详细对话过程，便于学习
+# 创建内存机制
+memory = RunnableWithMessageHistory(
+    prompt | llm,
+    lambda session_id: memory,  # 基于session_id获取对应的记忆
+    input_messages_key="input",
+    history_messages_key="history"
 )
 
 # 多轮对话示例
-print(conversation.predict(input="你好，请介绍一下LangChain。"))
-print(conversation.predict(input="它和直接用OpenAI API有什么区别？"))
-print(conversation.predict(input="能用一句话总结一下吗？")) 
+print(memory.invoke(
+    {"input": "你好，请介绍一下LangChain。"},
+    config={"configurable": {"session_id": "1"}}
+).content)
+
+print(memory.invoke(
+    {"input": "它和直接用OpenAI API有什么区别？"},
+    config={"configurable": {"session_id": "1"}}
+).content)
+
+print(memory.invoke(
+    {"input": "能用一句话总结一下吗？"},
+    config={"configurable": {"session_id": "1"}}
+).content)

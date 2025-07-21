@@ -4,23 +4,21 @@ AI自动化审批流基础工作流
 - 适合Python初学者
 """
 from langgraph.graph import StateGraph, END
-from nodes import submit_node, manager_approve_node, amount_branch_node, finance_approve_node, ceo_approve_node, notify_node, end_node, parallel_approve_node
+from nodes import submit_node, manager_approve_node, amount_branch_node, finance_approve_node, ceo_approve_node, \
+    notify_node, end_node, parallel_approve_node
 import json
 import os
 
+
 def export_mermaid():
     """导出审批流为Mermaid流程图"""
-    mermaid = ["graph TD"]
-    mermaid.append("submit[用户提交] --> manager[主管审批]")
-    mermaid.append("manager --> amount_branch[金额判断]")
-    mermaid.append("amount_branch -- 小于阈值 --> finance[财务审批]")
-    mermaid.append("amount_branch -- 大于等于阈值 --> ceo[总经理审批]")
-    mermaid.append("finance --> notify[通知]")
-    mermaid.append("ceo --> notify")
-    mermaid.append("notify --> end[结束]")
+    mermaid = ["graph TD", "submit[用户提交] --> manager[主管审批]", "manager --> amount_branch[金额判断]",
+               "amount_branch -- 小于阈值 --> finance[财务审批]", "amount_branch -- 大于等于阈值 --> ceo[总经理审批]",
+               "finance --> notify[通知]", "ceo --> notify", "notify --> end[结束]"]
     with open(os.path.join(os.path.dirname(__file__), 'approval_flow.mmd'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(mermaid))
     print("[可视化] 已导出审批流Mermaid流程图：approval_flow.mmd")
+
 
 def build_graph_from_dsl(flow_path):
     """根据flow.json配置动态生成审批流"""
@@ -47,6 +45,7 @@ def build_graph_from_dsl(flow_path):
             graph.add_edge(from_id, to_id)
     graph.add_edge(flow['nodes'][-1]['id'], END)
     return graph
+
 
 def run_approval_workflow(init_state=None, use_dsl=False):
     # 动态读取规则
@@ -75,8 +74,10 @@ def run_approval_workflow(init_state=None, use_dsl=False):
         graph.add_edge("submit", "manager")
         graph.add_edge("manager", "amount_branch")
         graph.add_edge("amount_branch", "finance", condition=lambda state: state["amount"] < amount_threshold)
-        graph.add_edge("amount_branch", "ceo", condition=lambda state: state["amount"] >= amount_threshold and not state.get("urgent"))
-        graph.add_edge("amount_branch", "parallel", condition=lambda state: state["amount"] >= amount_threshold and state.get("urgent"))
+        graph.add_edge("amount_branch", "ceo",
+                       condition=lambda state: state["amount"] >= amount_threshold and not state.get("urgent"))
+        graph.add_edge("amount_branch", "parallel",
+                       condition=lambda state: state["amount"] >= amount_threshold and state.get("urgent"))
         graph.add_edge("finance", "notify")
         graph.add_edge("ceo", "notify")
         graph.add_edge("parallel", "notify")
@@ -92,4 +93,4 @@ def run_approval_workflow(init_state=None, use_dsl=False):
             "reason": "采购高性能服务器",
             "urgent": True
         }
-    graph.invoke(init_state) 
+    graph.invoke(init_state)
