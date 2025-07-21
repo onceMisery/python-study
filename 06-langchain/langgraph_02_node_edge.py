@@ -73,5 +73,5 @@ graph.add_edge("say_goodbye", END)  # END表示流程结束
 
 # 3. 运行图（Graph）
 app = graph.compile()
-result = app.invoke({})
+result = app.invoke({"name": "测试"})  # 提供一个包含name字段的输入
 print("最终输出：", result)
